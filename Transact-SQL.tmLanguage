@@ -1484,6 +1484,45 @@
                 </dict>
                 <dict>
                     <key>name</key>
+                    <string>meta.boolean.set.identityinsert.sql</string>
+                    <key>match</key>
+                    <string>(?xi)
+                        (set)\s+(identity_insert)\s+  # captures 1-2
+                        (?:
+                            (\[)([^]]+)(\])                     # captures 3-5
+                        |   (")([^"]+)(")                       # captures 6-8
+                        |   ([#]?[_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 9
+                        )
+                        \s+(on|off)                  # capture 10
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.identityinsert.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.table.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.table.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.table.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>meta.boolean.set.sql</string>
+                    <key>match</key>
+                    <string>(?i)(set)\s+(\w+)\s+(on|off)</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
                     <string>expression.assignment.sql</string>
                     <key>begin</key>
                     <string>(?xi)
@@ -2109,18 +2148,6 @@
                     </array>
                     <key>end</key>
                     <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
-                </dict>
-                <dict>
-                    <key>name</key>
-                    <string>meta.boolean.set.sql</string>
-                    <key>match</key>
-                    <string>(?i)(set)\s+(\w+)\s+(on|off)</string>
-                    <key>captures</key>
-                    <dict>
-                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
-                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
-                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
-                    </dict>
                 </dict>
                 <dict>
                     <key>include</key>
