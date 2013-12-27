@@ -1071,7 +1071,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                    <string>(?i)(?=[);]|\b(?:print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
                 </dict>
                 <dict>
                     <key>name</key>
