@@ -3196,7 +3196,49 @@
                 </dict>
                 <dict>
                     <key>match</key>
-                    <string>(?i)\b(null|not|identity|primary|key|unique|clustered|nonclustered|index)\b</string>
+                    <string>(?i)\b(?:(not)\s+)?(null)\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.not.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.null.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(primary)\s+(key)(?:\s+(clustered|nonclustered))?\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.primary.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.key.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.clustered.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(identity)(?:\s*(\()(\d+)(?:\s*(,)\s*(\d+))?(\)))?</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.identity.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>punctuation.other.identity.start.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>punctuation.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>punctuation.other.identity.start.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(not)\s+(for)\s+(replication)\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.not.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.for.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.replication.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(unique|index)\b</string>
                     <key>captures</key>
                     <dict>
                         <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
