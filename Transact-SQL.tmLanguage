@@ -402,7 +402,7 @@
         <key>string_escape</key>
         <dict>
             <key>match</key>
-            <string>\\.</string>
+            <string>''</string>
             <key>name</key>
             <string>constant.character.escape.sql</string>
         </dict>
