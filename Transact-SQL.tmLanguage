@@ -286,7 +286,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -394,7 +394,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2023,7 +2023,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2072,7 +2072,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2251,7 +2251,7 @@
                                 # expression keywords
                                 as|convert|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
-                                from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
                                 begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
@@ -2301,7 +2301,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2379,7 +2379,7 @@
                                 # expression keywords
                                 as|convert|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
-                                from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
                                 begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
