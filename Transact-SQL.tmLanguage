@@ -183,6 +183,31 @@
                     </dict>
                 </dict>
                 <dict>
+                    <key>name</key>
+                    <string>expression.exists.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(?:(not)\s+)?(exists)\s*(\()</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.not.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.exists.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>punctuation.application.exists.start.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#select_statement</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>\)</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>punctuation.application.exists.end.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
                     <key>include</key>
                     <string>#function_application</string>
                 </dict>
