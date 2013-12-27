@@ -586,7 +586,7 @@
                     <string>;</string>
                     <key>captures</key>
                     <dict>
-                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>0</key> <dict><key>name</key><string>punctuation.statement.break.sql</string></dict>
                     </dict>
                 </dict>
                 <dict>
@@ -595,7 +595,7 @@
                     <key>captures</key>
                     <dict>
                         <key>1</key> <dict><key>name</key><string>entity.name.label.sql</string></dict>
-                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>punctuation.label.sql</string></dict>
                     </dict>
                 </dict>
                 <dict>
