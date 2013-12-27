@@ -1965,6 +1965,33 @@
                         </dict>
                         <dict>
                             <key>name</key>
+                            <string>clause.execute.assignment.sql</string>
+                            <key>match</key>
+                            <string>(?xi)
+                                (?:
+                                    (\[)([^]]+)(\])                  # captures 1-3
+                                |   (")([^"]+)(")                    # captures 4-6
+                                |   (@[_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 7
+                                )
+                                \s*
+                                (=)  # capture 8
+                                \s*
+                            </string>
+                            <key>captures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                                <key>5</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                                <key>6</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                                <key>7</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+
+                                <key>8</key> <dict><key>name</key><string>punctuation.assignment.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>name</key>
                             <string>statement.execute.bare.sql</string>
                             <key>begin</key>
                             <string>(?xi)
