@@ -1,0 +1,2666 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>fileTypes</key>
+    <array>
+        <string>sql</string>
+        <string>sqlpp</string>
+        <string>sqli</string>
+        <string>ddl</string>
+        <string>dml</string>
+    </array>
+    <key>foldingStartMarker</key>
+    <string>\s*\(\s*$</string>
+    <key>foldingStopMarker</key>
+    <string>^\s*\)</string>
+    <key>name</key>
+    <string>Transact-SQL</string>
+    <key>scopeName</key>
+    <string>source.sql</string>
+    <key>uuid</key>
+    <string>FB9CDAD0-6E40-11E3-981F-0800200C9A66</string>
+    <key>patterns</key>
+    <array>
+        <dict>
+            <key>include</key>
+            <string>#comments</string>
+        </dict>
+        <dict>
+            <key>include</key>
+            <string>#statements</string>
+        </dict>
+        <dict>
+            <key>include</key>
+            <string>#session</string>
+        </dict>
+    </array>
+
+    <key>repository</key>
+    <dict>
+
+        <key>comments</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>name</key>
+                    <string>comment.line.double-dash.sql</string>
+                    <key>match</key>
+                    <string>(--).*$\n?</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>punctuation.definition.comment.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>comment.block.c</string>
+                    <key>begin</key>
+                    <string>/\*</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>punctuation.definition.comment.sql</string></dict>
+                    </dict>
+                    <key>end</key>
+                    <string>\*/</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>expressions</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>subexpression</string>
+                    <key>begin</key>
+                    <string>\(</string>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#select_statement</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>\)</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>support.constant.sql</string>
+                    <key>match</key>
+                    <string>(?i)\b(?:null|current_timestamp)\b</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>keyword.operator.sql</string>
+                    <key>match</key>
+                    <string>(?i)(\bnot\s+in\b|\bin\b|\bnot\s+between\b|\bbetween\b|&lt;&gt;|=|&lt;|&gt;|\band\b|\bor\b|\bnot\b|%|\+|-|/|\*)</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>expression.cast.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(cast)\s*(\()</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.cast.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?xi)
+                        \b(as)                   # capture 1.
+                        \s+
+                        ([_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 2. data type
+                        (?:\s*(\()([^)]+)(\)))?       # capture 3-5. optional data type argument, which is assumed to be numeric
+                        \s*(\))                  # capture 6.
+                    </string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.as.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>storage.type.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>expression.convert.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b(convert)\s*                # capture 1
+                        (\()                          # capture 2
+                        \s*
+                        ([_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 3. data type
+                        (?:\s*(\()([^)]+)(\)))?       # capture 4-6. optional data type argument, which is assumed to be numeric
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.convert.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>storage.type.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>name</key>
+                            <string>keyword.other.sql</string>
+                            <key>match</key>
+                            <string>,</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>\)</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#function_application</string>
+                </dict>
+                <dict>
+                    <key>begin</key>
+                    <string>(?i)\b(case)\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.case.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string> <!-- for the scrutinee and consequents both -->
+                        </dict>
+                        <dict>
+                            <key>begin</key>
+                            <string>(?i)\b(when)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.case.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#expressions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)\b(then)\b</string>
+                            <key>endCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.then.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>match</key>
+                            <string>(?i)\b(else)\b</string>
+                            <key>captures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.else.sql</string></dict>
+                            </dict>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)\b(end)\b</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.end.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>constant.numeric</string>
+                    <key>match</key>
+                    <string>-?\d+(?:\.\d+)?</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>string.quoted.single.sql</string>
+                    <key>comment</key>
+                    <string>this is faster than the next begin/end rule since sub-pattern will match till end-of-line and SQL files tend to have very long lines.</string>
+                    <key>match</key>
+                    <string>(')[^'\\]*(')</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>punctuation.definition.string.begin.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>punctuation.definition.string.end.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>string.quoted.single.sql</string>
+                    <key>begin</key>
+                    <string>'</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>punctuation.definition.string.begin.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#string_escape</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>'</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>punctuation.definition.string.end.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?xi)
+                        # make sure not to match reserved words thinking they're a column name
+                        (?!\b(?:
+                            # expression keywords
+                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            # select statement clauses
+                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            # statement keywords
+                            begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            # data types
+                            datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                        )\b)
+                        (?:
+                            # two part identifier: object.column
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 1-3
+                            |   (")([^"]+)(")                    # captures 4-6
+                            |   ([#@]?[_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 8-10
+                            |   (")([^"]+)(")                    # captures 11-13
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*)      # capture 14
+                            )
+                        |
+                            # just a column
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 15-17
+                            |   (")([^"]+)(")                    # captures 18-20
+                            |   (\b[_a-zA-Z][#$@_a-zA-Z0-9]*)      # capture 21
+                            )
+                        |
+                            # special variable name
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 22-24
+                            |   (")([^"]+)(")                    # captures 25-27
+                            |   (@@[_a-zA-Z][#$@_a-zA-Z0-9]*)    # capture 28
+                            )
+                        |
+                            # just a variable name
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 29-31
+                            |   (")([^"]+)(")                    # captures 32-34
+                            |   ((?:@|\b)[_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 35
+                            )
+                        )
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+
+                        <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+                        <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+
+                        <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>support.other.variable.sql</string></dict>
+                        <key>24</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>support.other.variable.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>support.other.variable.sql</string></dict>
+
+                        <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>30</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                        <key>31</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+
+        <key>string_escape</key>
+        <dict>
+            <key>match</key>
+            <string>\\.</string>
+            <key>name</key>
+            <string>constant.character.escape.sql</string>
+        </dict>
+
+        <key>function_application</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>begin</key>
+                    <string>(?xi)
+                        # make sure not to match reserved words thinking they're a column name
+                        (?!\b(?:
+                            # expression keywords
+                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            # select statement clauses
+                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            # statement keywords
+                            begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            # data types
+                            datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                        )\b)
+                        (?:
+                            # four part identifier: server.database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 1-3
+                            |   (")([^"]+)(")               # captures 4-6
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 8-10
+                            |   (")([^"]+)(")               # captures 11-13
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 14
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 15-17
+                            |   (")([^"]+)(")               # captures 18-20
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 21
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 22-24
+                            |   (")([^"]+)(")               # captures 25-27
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 28
+                            )
+                        |
+                            # three part identifier: database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 29-31
+                            |   (")([^"]+)(")               # captures 32-34
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 35
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 36-38
+                            |   (")([^"]+)(")               # captures 39-41
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 42
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 43-45
+                            |   (")([^"]+)(")               # captures 46-48
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 49
+                            )
+                        |
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 50-52
+                            |   (")([^"]+)(")               # captures 53-55
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 56
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 57-59
+                            |   (")([^"]+)(")               # captures 60-62
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 63
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 64-66
+                            |   (")([^"]+)(")               # captures 67-69
+                            |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 70
+                            )
+                        )
+                        \s*
+                        (\()  # capture 71
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <!-- four part -->
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>24</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <!-- three part -->
+                        <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>30</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>31</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>36</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>37</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>38</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>39</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>40</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>41</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>42</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>43</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>44</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>45</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>46</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>47</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>48</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>49</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <!-- two part -->
+                        <key>50</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>51</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>52</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>53</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>54</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>55</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>56</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>57</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>58</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>59</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>60</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>61</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>62</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>63</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <!-- single part -->
+                        <key>64</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>65</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>66</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>67</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>68</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>69</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>70</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <key>71</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>\)</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+
+        <key>statements</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>;</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>\b([_a-zA-Z][#$@_a-zA-Z0-9]*)(:)</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>entity.name.label.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#select_statement</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>statement.update.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b(update)
+                        \s*
+                        (?:
+                            # four part identifier: server.database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 1-3
+                            |   (")([^"]+)(")               # captures 4-6
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 8-10
+                            |   (")([^"]+)(")               # captures 11-13
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 14
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 15-17
+                            |   (")([^"]+)(")               # captures 18-20
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 21
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 22-24
+                            |   (")([^"]+)(")               # captures 25-27
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 28
+                            )
+                        |
+                            # three part identifier: database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 29-31
+                            |   (")([^"]+)(")               # captures 32-34
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 35
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 36-38
+                            |   (")([^"]+)(")               # captures 39-41
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 42
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 43-45
+                            |   (")([^"]+)(")               # captures 46-48
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 49
+                            )
+                        |
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 50-52
+                            |   (")([^"]+)(")               # captures 53-55
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 56
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 57-59
+                            |   (")([^"]+)(")               # captures 60-62
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 63
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 64-66
+                            |   (")([^"]+)(")               # captures 67-69
+                            |   ((?:\b|[#@])[_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 70
+                            )
+                        )
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.update.sql</string></dict>
+
+                        <!-- four part -->
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+
+                        <key>9</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>15</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>16</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>17</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>22</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>23</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>24</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>29</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <!-- three part -->
+                        <key>30</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>31</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>36</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>37</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>38</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>39</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>40</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>41</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>42</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>43</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>44</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>45</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>46</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>47</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>48</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>49</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>50</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <!-- two part -->
+                        <key>51</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>52</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>53</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>54</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>55</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>56</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>57</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>58</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>59</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>60</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>61</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>62</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>63</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>64</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <!-- single part -->
+                        <key>65</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>66</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>67</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>68</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>69</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>70</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>71</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>begin</key>
+                            <string>(?i)\b(set)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>name</key>
+                                    <string>clause.update.assignment.sql</string>
+                                    <key>begin</key>
+                                    <string>(?xi)
+                                        (?:
+                                            (\[)([^]]+)(\])                 # captures 9-11
+                                        |   (")([^"]+)(")                   # captures 12-14
+                                        |   ([_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 15
+                                        )
+                                        \s*
+                                        (=)
+                                        \s*
+                                    </string>
+                                    <key>beginCaptures</key>
+                                    <dict>
+                                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                        <key>2</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+                                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                        <key>5</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+                                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                        <key>7</key> <dict><key>name</key><string>variable.column.sql</string></dict>
+
+                                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                    </dict>
+                                    <key>patterns</key>
+                                    <array>
+                                        <dict>
+                                            <key>include</key>
+                                            <string>#expressions</string>
+                                        </dict>
+                                    </array>
+                                    <key>end</key>
+                                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#from_join_where_clause</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(begin|end)\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.block.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>begin</key>
+                    <string>(?i)\b(?:(if)|(while)|(return))\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.if.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.while.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.return.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(else)\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.else.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>statement.declarecursor.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b(declare)
+                        \s+
+                        ([_a-zA-Z][#$@_a-zA-Z0-9]*)
+                        (?:\s+(insensitive))?
+                        (?:\s+(scroll))?
+                        \s+(cursor)
+                        \s+(for)
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.declare.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>variable.cursor.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.insensitive.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.scroll.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.cursor.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.for.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#select_statement</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(?:(open)|(close)|(deallocate))\s+([_a-zA-Z][#$@_a-zA-Z0-9]*)</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.open.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.close.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.deallocate.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.cursor.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b
+                        (fetch)                            # capture 1
+                        (?:
+                            \s+(next)|(prior)|(first)|(last)  # capture 2-5
+                        |   \s+(?:(absolute)|(relative))\s*(?:(\d+)|(@[_a-zA-Z][#$@_a-zA-Z0-9]*)) # capture 6-9
+                        )?
+                        (?:\s+(from))?                     # capture 10
+                        (?:\s+(global))?                   # capture 11
+                        \s+(@?[_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 12
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.fetch.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.next.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.prior.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.first.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.last.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.absolute.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>keyword.other.relative.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>constant.numeric</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>keyword.other.from.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.global.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>variable.cursor.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>begin</key>
+                            <string>(?i)\b(into)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.into.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>name</key>
+                                    <string>variable.declared.sql</string>
+                                    <key>match</key>
+                                    <string>(@?[_a-zA-Z][#$@_a-zA-Z0-9]*)</string>
+                                </dict>
+                                <dict>
+                                    <key>name</key>
+                                    <string>keyword.other.sql</string>
+                                    <key>match</key>
+                                    <string>,</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>expression.declare.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(declare)\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.declare.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#variable_declarations</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>expression.assignment.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b(set)\b                                # capture 1
+                        \s*
+                        (?:
+                            # special variable name
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 2-4
+                            |   (")([^"]+)(")                    # captures 5-7
+                            |   (@@[_a-zA-Z][#$@_a-zA-Z0-9]*)    # capture 8
+                            )
+                        |
+                            # just a variable name
+                            (?:
+                                (\[)([^]]+)(\])                  # captures 9-11
+                            |   (")([^"]+)(")                    # captures 12-14
+                            |   (@[_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 15
+                            )
+                        )\s*
+                        (=)                                      # capture 16
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
+
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>support.other.variable.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>support.other.variable.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>support.other.variable.sql</string></dict>
+
+                        <key>9</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>15</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+
+                        <key>16</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>meta.function.create.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        # captures 1-2
+                        (create)\s+(proc(?:edure)?|function)\s+
+                        (?:
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 3-5
+                            |   (")([^"]+)(")               # captures 6-8
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 9
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 10-12
+                            |   (")([^"]+)(")               # captures 13-15
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 16
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 17-19
+                            |   (")([^"]+)(")               # captures 20-22
+                            |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 23
+                            )
+                        )
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.create.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.function.sql</string></dict>
+
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>entity.name.function.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>entity.name.function.sql</string></dict>
+                        <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>entity.name.function.sql</string></dict>
+
+                        <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>entity.name.function.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>entity.name.function.sql</string></dict>
+                        <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>entity.name.function.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#parameter_declarations</string>
+                        </dict>
+                        <dict>
+                            <key>match</key>
+                            <string>[()]</string>
+                            <key>captures</key>
+                            <dict>
+                                <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>match</key>
+                            <string>(?xi)
+                                \b(returns)                   # capture 1.
+                                \s+
+                                ([_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 2. data type
+                                (?:\s*(\()([^)]+)(\)))?       # capture 3-5. optional data type argument, which is assumed to be numeric
+                            </string>
+                            <key>captures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.returns.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>storage.type.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                                <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>begin</key>
+                            <string>(?i)\b(as)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#statements</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=go)</string>
+                            <key>endCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.go.sql</string></dict>
+                            </dict>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=go)</string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.go.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>meta.table.create.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        # captures 1-2
+                        (create)\s+(table)\s+
+                        (?:
+                            # three part identifier: database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 3-5
+                            |   (")([^"]+)(")               # captures 6-8
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 9
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 10-12
+                            |   (")([^"]+)(")               # captures 13-15
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 16
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 17-19
+                            |   (")([^"]+)(")               # captures 20-22
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 23
+                            )
+                        |
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 24-26
+                            |   (")([^"]+)(")               # captures 27-29
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 30
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 31-33
+                            |   (")([^"]+)(")               # captures 34-36
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 37
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 38-40
+                            |   (")([^"]+)(")               # captures 41-43
+                            |   ((?:\b|[#@])[_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 44
+                            )
+                        )
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.create.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.function.sql</string></dict>
+
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                        <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+
+                        <key>24</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>30</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>31</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                        <key>36</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>37</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+
+                        <key>38</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>39</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                        <key>40</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>41</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>42</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                        <key>43</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>44</key> <dict><key>name</key><string>entity.name.table.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.createtable.definitions.sql</string>
+                            <key>begin</key>
+                            <string>\(</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#comments</string>
+                                </dict>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#table_definitions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>\)</string>
+                            <key>endCaptures</key>
+                            <dict>
+                                <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>statement.execute.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(exec(?:ute)?)\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.execute.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#function_application</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>statement.execute.bare.sql</string>
+                            <key>begin</key>
+                            <string>(?xi)
+                                (?!\b(?:
+                                    # expression keywords
+                                    as|convert|cast|in|between|not|and|or|case|when|then|
+                                    # select statement clauses
+                                    from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                    # statement keywords
+                                    begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                                    # data types
+                                    datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                                )\b)
+                                (?:
+                                    # four part identifier: server.database.schema.object
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 1-3
+                                    |   (")([^"]+)(")               # captures 4-6
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                                    )
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 8-10
+                                    |   (")([^"]+)(")               # captures 11-13
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 14
+                                    )?
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 15-17
+                                    |   (")([^"]+)(")               # captures 18-20
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 21
+                                    )?
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 22-24
+                                    |   (")([^"]+)(")               # captures 25-27
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 28
+                                    )
+                                |
+                                    # three part identifier: database.schema.object
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 29-31
+                                    |   (")([^"]+)(")               # captures 32-34
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 35
+                                    )
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 36-38
+                                    |   (")([^"]+)(")               # captures 39-41
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 42
+                                    )?
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 43-45
+                                    |   (")([^"]+)(")               # captures 46-48
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 49
+                                    )
+                                |
+                                    # two part identifier: schema.object
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 50-52
+                                    |   (")([^"]+)(")               # captures 53-55
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 56
+                                    )
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 57-59
+                                    |   (")([^"]+)(")               # captures 60-62
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 63
+                                    )
+                                |
+                                    # single part object name identifier
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 64-66
+                                    |   (")([^"]+)(")               # captures 67-69
+                                    |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 70
+                                    )
+                                )
+                            </string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <!-- four part -->
+                                <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>5</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                                <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>7</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+
+                                <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>9</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>12</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>14</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                                <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>16</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>19</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>21</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                                <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>23</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>24</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>26</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>28</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                                <!-- three part -->
+                                <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>30</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>31</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>33</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>34</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>35</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                                <key>36</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>37</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>38</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>39</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>40</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>41</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>42</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                                <key>43</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>44</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>45</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>46</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>47</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>48</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>49</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                                <!-- two part -->
+                                <key>50</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>51</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>52</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>53</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>54</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>55</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>56</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                                <key>57</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>58</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>59</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>60</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>61</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>62</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>63</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                                <!-- single part -->
+                                <key>64</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>65</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>66</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>67</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>68</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                                <key>69</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>70</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                                <key>71</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>match</key>
+                                    <string>(?i)(@[_a-zA-Z][#$@_a-zA-Z0-9]*)\s+(output)</string>
+                                    <key>captures</key>
+                                    <dict>
+                                        <key>1</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                                        <key>2</key> <dict><key>name</key><string>keyword.other.output.sql</string></dict>
+                                    </dict>
+                                </dict>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#expressions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#function_application</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>select_statement</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>name</key>
+                    <string>statement.select.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(select)\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.select.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.select.assignment.sql</string>
+                            <key>begin</key>
+                            <string>(?xi)
+                                (?:
+                                    (\[)([^]]+)(\])                  # captures 9-11
+                                |   (")([^"]+)(")                    # captures 12-14
+                                |   (@[_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 15
+                                )
+                                \s*
+                                (=)
+                                \s*
+                            </string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>5</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+                                <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>7</key> <dict><key>name</key><string>variable.declared.sql</string></dict>
+
+                                <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#expressions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                        </dict>
+                        <dict>
+                            <key>match</key>
+                            <string>(?i)\b(?:(as)|(top)|(all)|(distinct))\b</string>
+                            <key>captures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.as.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>keyword.other.top.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.all.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>keyword.other.distinct.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.select.into.sql</string>
+                            <key>match</key>
+                            <string>(?xi)
+                                \b(into)    # capture 1.
+                                \s+
+                                (?:
+                                    # four part identifier: server.database.schema.object
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 2-4
+                                    |   (")([^"]+)(")               # captures 5-7
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 8
+                                    )
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 9-11
+                                    |   (")([^"]+)(")               # captures 12-14
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 15
+                                    )?
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 16-18
+                                    |   (")([^"]+)(")               # captures 19-21
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 22
+                                    )?
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 23-25
+                                    |   (")([^"]+)(")               # captures 26-28
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 29
+                                    )
+                                |
+                                    # three part identifier: database.schema.object
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 30-32
+                                    |   (")([^"]+)(")               # captures 33-35
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 36
+                                    )
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 37-39
+                                    |   (")([^"]+)(")               # captures 40-42
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 43
+                                    )?
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 44-46
+                                    |   (")([^"]+)(")               # captures 47-49
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 50
+                                    )
+                                |
+                                    # two part identifier: schema.object
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 51-53
+                                    |   (")([^"]+)(")               # captures 54-56
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 57
+                                    )
+                                    \.
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 58-60
+                                    |   (")([^"]+)(")               # captures 61-63
+                                    |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 64
+                                    )
+                                |
+                                    # single part object name identifier
+                                    (?:
+                                        (\[)([^]]+)(\])             # captures 65-67
+                                    |   (")([^"]+)(")               # captures 68-70
+                                    |   ((?:\b|[#@])[_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 71
+                                    )
+                                )
+                            </string>
+                            <key>captures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.into.sql</string></dict>
+
+                                <!-- four part -->
+                                <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>6</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                                <key>7</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>8</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+
+                                <key>9</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>10</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>13</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>14</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>15</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                                <key>16</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>17</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>19</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>20</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>21</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>22</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                                <key>23</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>24</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>26</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>27</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>28</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>29</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                                <!-- three part -->
+                                <key>30</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>31</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>33</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>34</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                                <key>35</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>36</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                                <key>37</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>38</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>39</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>40</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>41</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>42</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>43</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                                <key>44</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>45</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>46</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>47</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>48</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>49</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>50</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                                <!-- two part -->
+                                <key>51</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>52</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>53</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>54</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>55</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                                <key>56</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>57</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                                <key>58</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>59</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>60</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>61</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>62</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>63</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>64</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                                <!-- single part -->
+                                <key>65</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>66</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>67</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>68</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>69</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                                <key>70</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>71</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#from_join_where_clause</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.select.groupororder.sql</string>
+                            <key>begin</key>
+                            <string>(?i)\b(?:(group)|(order))\s+(by)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.group.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>keyword.other.order.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.by.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#expressions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.select.for.sql</string>
+                            <key>match</key>
+                            <string>(?xi)
+                                \b(for)                                # capture 1
+                                \s+
+                                (?:
+                                    (browse)                           # capture 2
+                                |   (xml)\s+                           # capture 3
+                                    (?:
+                                        (?:
+                                            (raw)\s*                   # capture 4
+                                            (\()('[^']*')(\))          # capture 5-7
+                                        |   (auto)                     # capture 8
+                                        )
+                                    |   (explicit)                     # capture 9
+                                    |   (path)\s*                      # capture 10
+                                        (\()('[^']*')(\))              # capture 11-13
+                                    )
+                                    (?:
+                                        \s*(,)\s*                      # capture 14
+                                        (?:
+                                            (binary)\s+(base64)        # capture 15-16
+                                        |   (type)                     # capture 17
+                                        |   (root)\s*                  # capture 18
+                                            (\()('[^']*')(\))          # capture 19-21
+                                        |   (elements)                 # capture 22
+                                            (?:\s+(xsinil)|(absent))?  # capture 23-24
+                                        |   (xmldata)                  # capture 25
+                                        |   (xmlschema)\s*             # capture 26
+                                            (\()('[^']*')(\))          # capture 27-29
+                                        )
+                                    )*
+                                |   (update)                           # capture 30
+                                )
+                            </string>
+                            <key>captures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.for.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>keyword.other.browse.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.xml.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>keyword.other.raw.sql</string></dict>
+                                <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>6</key> <dict><key>name</key><string>constant.string.sql</string></dict>
+                                <key>7</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>8</key> <dict><key>name</key><string>keyword.other.auto.sql</string></dict>
+                                <key>9</key> <dict><key>name</key><string>keyword.other.explicit.sql</string></dict>
+                                <key>10</key> <dict><key>name</key><string>keyword.other.path.sql</string></dict>
+                                <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>12</key> <dict><key>name</key><string>constant.string.sql</string></dict>
+                                <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>14</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>15</key> <dict><key>name</key><string>keyword.other.binary.sql</string></dict>
+                                <key>16</key> <dict><key>name</key><string>keyword.other.base64.sql</string></dict>
+                                <key>17</key> <dict><key>name</key><string>keyword.other.type.sql</string></dict>
+                                <key>18</key> <dict><key>name</key><string>keyword.other.root.sql</string></dict>
+                                <key>19</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>20</key> <dict><key>name</key><string>constant.string.sql</string></dict>
+                                <key>21</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>22</key> <dict><key>name</key><string>keyword.other.elements.sql</string></dict>
+                                <key>23</key> <dict><key>name</key><string>keyword.other.xsinil.sql</string></dict>
+                                <key>24</key> <dict><key>name</key><string>keyword.other.absent.sql</string></dict>
+                                <key>25</key> <dict><key>name</key><string>keyword.other.xmldata.sql</string></dict>
+                                <key>26</key> <dict><key>name</key><string>keyword.other.xmlschema.sql</string></dict>
+                                <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>28</key> <dict><key>name</key><string>constant.string.sql</string></dict>
+                                <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                                <key>30</key> <dict><key>name</key><string>keyword.other.update.sql</string></dict>
+                            </dict>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.select.setoperation.sql</string>
+                            <key>begin</key>
+                            <string>(?xi)
+                                (?:
+                                    (union)(?:\s+(all))?    # captures 1-2
+                                |   (except)                # capture 3
+                                |   (intersect)             # capture 4
+                                )
+                            </string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.union.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>keyword.other.all.sql</string></dict>
+                                <key>3</key> <dict><key>name</key><string>keyword.other.except.sql</string></dict>
+                                <key>4</key> <dict><key>name</key><string>keyword.other.intersect.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#comments</string>
+                                </dict>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#select_statement</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>from_join_where_clause</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>name</key>
+                    <string>clause.from.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(from)\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.from.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#table_sources</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>clause.join.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b
+                        (?:
+                            (?:
+                                (inner)                         # capture 1
+                            |   (cross)                         # capture 2
+                            |   (full|left|right)(?:\s+(outer)) # capture 3-4
+                            )
+                            \s+
+                        )?
+                        (join)                           # capture 5
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.inner.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.cross.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.outerjointype.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.outer.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.join.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#table_sources</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.join.on.sql</string>
+                            <key>begin</key>
+                            <string>(?i)\b(on)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.on.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#expressions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                </dict>
+                <dict>
+                    <key>string</key>
+                    <string>clause.where.sql</string>
+                    <key>begin</key>
+                    <string>(?i)\b(?:(where)|(having))\b</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.where.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.having.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>table_sources</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>name</key>
+                    <string>clause.tablesource.subselect.sql</string>
+                    <key>begin</key>
+                    <string>\(</string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
+                            <string>#select_statement</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?xi)
+                        (\))    # capture 1
+                        \s*
+                        (?:(as)\s+)?    # capture 2
+                        (?!\b(?:
+                            # expression keywords
+                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            # select statement clauses
+                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            # statement keywords
+                            begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            # data types
+                            datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                        )\b)
+                        (?:
+                            (\[)([^]]+)(\])             # captures 3-5
+                        |   (")([^"]+)(")               # captures 6-8
+                        |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 9
+                        )
+                        # in rare cases (XML functions, mostly) the table alias will have column names in parens, so we need to gobble up those too
+                        (?:
+                            \s*
+                            (\()                                      # capture 10
+                            ([_a-zA-Z][#$@_a-zA-Z0-9]*)               # capture 11
+                            (?:\s*(,)\s*([_a-zA-Z][#$@_a-zA-Z0-9]*))* # capture 12-13
+                            (\))                                      # capture 14
+                        )?
+                    </string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.as.sql</string></dict>
+
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>variable.name.column.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>variable.name.column.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>clause.tablesource.tablefunction.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        (?!\b(?:
+                            # expression keywords
+                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            # select statement clauses
+                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            # statement keywords
+                            begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            # data types
+                            datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                        )\b)
+                        (?:
+                            # four part identifier: server.database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 1-3
+                            |   (")([^"]+)(")               # captures 4-6
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 8-10
+                            |   (")([^"]+)(")               # captures 11-13
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 14
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 15-16
+                            |   (")([^"]+)(")               # captures 18-20
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 21
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 22-24
+                            |   (")([^"]+)(")               # captures 25-27
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 28
+                            )
+                        |
+                            # three part identifier: database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 29-31
+                            |   (")([^"]+)(")               # captures 32-34
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 35
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 36-38
+                            |   (")([^"]+)(")               # captures 39-41
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 42
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 43-45
+                            |   (")([^"]+)(")               # captures 46-48
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 49
+                            )
+                        |
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 50-52
+                            |   (")([^"]+)(")               # captures 53-55
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 56
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 57-59
+                            |   (")([^"]+)(")               # captures 60-62
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 63
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 64-66
+                            |   (")([^"]+)(")               # captures 67-69
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 70
+                            )
+                        )
+                        (?:\s+)*
+                        (\()        # capture 71
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <!-- four part -->
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>24</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <!-- three part -->
+                        <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>30</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>31</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>36</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>37</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>38</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>39</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>40</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>41</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>42</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>43</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>44</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>45</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>46</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>47</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>48</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>49</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <!-- two part -->
+                        <key>50</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>51</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>52</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>53</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>54</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>55</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>56</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>57</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>58</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>59</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>60</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>61</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>62</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>63</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <!-- single part -->
+                        <key>64</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>65</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>66</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>67</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>68</key> <dict><key>name</key><string>support.function.sql</string></dict>
+                        <key>69</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>70</key> <dict><key>name</key><string>support.function.sql</string></dict>
+
+                        <key>71</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#expressions</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?xi)
+                        (\))    # capture 1
+                        (?:
+                            \s*
+                            (?:(as)\s+)?    # capture 2
+                            (?!\b(?:
+                                # expression keywords
+                                as|convert|cast|in|between|not|and|or|case|when|then|
+                                # select statement clauses
+                                from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                # statement keywords
+                                begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                                # data types
+                                datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                            )\b)
+                            (?:
+                                (\[)([^]]+)(\])             # captures 3-5
+                            |   (")([^"]+)(")               # captures 6-8
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 9
+                            )
+                            # in rare cases (XML functions, mostly) the table alias will have column names in parens, so we need to gobble up those too
+                            (?:
+                                \s*
+                                (\()                                      # capture 10
+                                ([_a-zA-Z][#$@_a-zA-Z0-9]*)               # capture 11
+                                (?:\s*(,)\s*([_a-zA-Z][#$@_a-zA-Z0-9]*))* # capture 12-13
+                                (\))                                      # capture 14
+                            )?
+                        )?
+                    </string>
+                    <key>endCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.as.sql</string></dict>
+
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>variable.name.column.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>variable.name.column.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>clause.tablesource.object.sql</string>
+                    <key>match</key>
+                    <string>(?xi)
+                        (?!\b(?:
+                            # expression keywords
+                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            # select statement clauses
+                            from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            # statement keywords
+                            begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            # data types
+                            datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                        )\b)
+                        (?:
+                            # four part identifier: server.database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 1-3
+                            |   (")([^"]+)(")               # captures 4-6
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 8-10
+                            |   (")([^"]+)(")               # captures 11-13
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 14
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 15-16
+                            |   (")([^"]+)(")               # captures 18-20
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 21
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 22-24
+                            |   (")([^"]+)(")               # captures 25-27
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 28
+                            )
+                        |
+                            # three part identifier: database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 29-31
+                            |   (")([^"]+)(")               # captures 32-34
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 35
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 36-38
+                            |   (")([^"]+)(")               # captures 39-41
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 42
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 43-45
+                            |   (")([^"]+)(")               # captures 46-48
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 49
+                            )
+                        |
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 50-52
+                            |   (")([^"]+)(")               # captures 53-55
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 56
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 57-59
+                            |   (")([^"]+)(")               # captures 60-62
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 63
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 64-66
+                            |   (")([^"]+)(")               # captures 67-69
+                            |   ((?:\b|[#@])[_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 70
+                            )
+                        )
+                        (?:
+                            (?:\s+(as))?    # capture 71
+                            \s+
+                            (?!\b(?:
+                                # expression keywords
+                                as|convert|cast|in|between|not|and|or|case|when|then|
+                                # select statement clauses
+                                from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                # statement keywords
+                                begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                                # data types
+                                datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
+                            )\b)
+                            (?:
+                                (\[)([^]]+)(\])             # captures 72-74
+                            |   (")([^"]+)(")               # captures 75-77
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 78
+                            )
+                        )?
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <!-- four part -->
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.server.sql</string></dict>
+
+                        <key>8</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>15</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>17</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>22</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>24</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <!-- three part -->
+                        <key>29</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>30</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>31</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>36</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>37</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>38</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>39</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>40</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>41</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>42</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>43</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>44</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>45</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>46</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>47</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>48</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>49</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <!-- two part -->
+                        <key>50</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>51</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>52</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>53</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>54</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>55</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>56</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>57</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>58</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>59</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>60</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>61</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>62</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>63</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <!-- single part -->
+                        <key>64</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>65</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>66</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>67</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>68</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>69</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>70</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <key>71</key> <dict><key>name</key><string>keyword.other.as.sql</string></dict>
+
+                        <key>72</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>73</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                        <key>74</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>75</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>76</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                        <key>77</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>78</key> <dict><key>name</key><string>variable.tablealias.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+
+        <key>table_definitions</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>match</key>
+                    <string>,</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?i)\b(primary|key|unique|clustered|nonclustered|index)\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?xi)
+                        \b(constraint)
+                        \s*
+                        (?:
+                            (\[)([^]]+)(\])             # captures 1-3
+                        |   (")([^"]+)(")               # captures 4-6
+                        |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                        )
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.constraint.sql</string></dict>
+
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?xi)
+                        (?:
+                            (\[)([^]]+)(\])             # captures 1-3
+                        |   (")([^"]+)(")               # captures 4-6
+                        |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                        )
+                        \s+
+                        ([_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 8. data type
+                        (?:\s*(\()([^)]+)(\)))?       # capture 9-11. optional data type argument, which is assumed to be numeric
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>entity.name.column.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>entity.name.column.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>entity.name.column.sql</string></dict>
+
+                        <key>8</key> <dict><key>name</key><string>storage.type.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>10</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+
+        <key>session</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>name</key>
+                    <string>meta.go.sql</string>
+                    <key>match</key>
+                    <string>(?i)^\s*(go)\s*$</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.go.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>meta.boolean.set.sql</string>
+                    <key>match</key>
+                    <string>(?i)(set)\s+(\w+)\s+(on|off)</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+
+        <key>variable_declarations</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>match</key>
+                    <string>\s*(,)\s*</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?xi)
+                        (@[_a-zA-Z][#$@_a-zA-Z0-9]*)  # capture 1. identifier
+                        \s+
+                        ([_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 2. data type
+                        (?:\s*(\()([^)]+)(\)))?       # capture 3-5. optional data type argument, which is assumed to be numeric
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>variable.declaration.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>storage.type.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+
+        <key>parameter_declarations</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>match</key>
+                    <string>\s*(,)\s*</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>0</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?xi)
+                        (@[_a-zA-Z][#$@_a-zA-Z0-9]*)  # capture 1. identifier
+                        \s+
+                        ([_a-zA-Z][#$@_a-zA-Z0-9]*)   # capture 2. data type
+                        (?:\s*(\()([^)]+)(\)))?       # capture 3-5. optional data type argument, which is assumed to be numeric
+                        (?:\s*(output))?              # capture 6. when used in a SP declaration the word output is legal here
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>variable.parameter.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>storage.type.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>constant.numeric.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+            </array>
+        </dict>
+    </dict>
+</dict>
+</plist>
