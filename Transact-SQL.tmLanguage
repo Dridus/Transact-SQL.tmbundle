@@ -1947,6 +1947,18 @@
                     <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
                 </dict>
                 <dict>
+                    <key>name</key>
+                    <string>meta.boolean.set.sql</string>
+                    <key>match</key>
+                    <string>(?i)(set)\s+(\w+)\s+(on|off)</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
                     <key>include</key>
                     <string>#function_application</string>
                 </dict>
@@ -3012,18 +3024,6 @@
                     <key>captures</key>
                     <dict>
                         <key>1</key> <dict><key>name</key><string>keyword.other.go.sql</string></dict>
-                    </dict>
-                </dict>
-                <dict>
-                    <key>name</key>
-                    <string>meta.boolean.set.sql</string>
-                    <key>match</key>
-                    <string>(?i)(set)\s+(\w+)\s+(on|off)</string>
-                    <key>captures</key>
-                    <dict>
-                        <key>1</key> <dict><key>name</key><string>keyword.other.set.sql</string></dict>
-                        <key>2</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
-                        <key>3</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
                     </dict>
                 </dict>
             </array>
