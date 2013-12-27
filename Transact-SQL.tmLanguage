@@ -311,7 +311,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -419,7 +419,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -1055,11 +1055,11 @@
                                         </dict>
                                     </array>
                                     <key>end</key>
-                                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                         </dict>
                         <dict>
                             <key>include</key>
@@ -1765,7 +1765,7 @@
                                     # expression keywords
                                     as|convert|cast|in|between|not|and|or|case|when|then|
                                     # select statement clauses
-                                    on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                    on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                     # statement keywords
                                     return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                     # data types
@@ -2014,7 +2014,7 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                         </dict>
                         <dict>
                             <key>match</key>
@@ -2212,7 +2212,7 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                         </dict>
                         <dict>
                             <key>name</key>
@@ -2353,7 +2353,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -2365,7 +2365,7 @@
                             (?:
                                 (inner)                         # capture 1
                             |   (cross)                         # capture 2
-                            |   (full|left|right)(?:\s+(outer)) # capture 3-4
+                            |   (full|left|right)(?:\s+(outer))? # capture 3-4
                             )
                             \s+
                         )?
@@ -2406,11 +2406,11 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                            <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                 </dict>
                 <dict>
                     <key>string</key>
@@ -2430,7 +2430,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
+                    <string>(?i)(?=[);]|\b(?:for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|where|group\s+by|order\s+by|having|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare))</string>
                 </dict>
             </array>
         </dict>
@@ -2468,7 +2468,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2517,7 +2517,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2696,7 +2696,7 @@
                                 # expression keywords
                                 as|convert|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
-                                on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
                                 return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
@@ -2746,7 +2746,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2824,7 +2824,7 @@
                                 # expression keywords
                                 as|convert|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
-                                on|into|(?:(?:inner|cross|(?:left|right|full))\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?join|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
                                 return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
@@ -2951,7 +2951,7 @@
                 </dict>
                 <dict>
                     <key>match</key>
-                    <string>(?i)\b(primary|key|unique|clustered|nonclustered|index)\b</string>
+                    <string>(?i)\b(null|not|identity|primary|key|unique|clustered|nonclustered|index)\b</string>
                     <key>captures</key>
                     <dict>
                         <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
