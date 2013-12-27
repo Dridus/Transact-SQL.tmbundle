@@ -1289,7 +1289,7 @@
                 </dict>
                 <dict>
                     <key>name</key>
-                    <string>statement.declarecursor.sql</string>
+                    <string>statement.declare.cursor.sql</string>
                     <key>begin</key>
                     <string>(?xi)
                         \b(declare)
@@ -1399,7 +1399,60 @@
                 </dict>
                 <dict>
                     <key>name</key>
-                    <string>expression.declare.sql</string>
+                    <string>statement.declare.table.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        \b(declare)
+                        \s+
+                        (@[_a-zA-Z][#$@_a-zA-Z0-9]*)
+                        \s+(table)
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.declare.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>variable.table.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>keyword.other.table.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.createtable.definitions.sql</string>
+                            <key>begin</key>
+                            <string>\(</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>0</key> <dict><key>name</key><string>punctuation.definition.table.start.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#comments</string>
+                                </dict>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#table_definitions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>\)</string>
+                            <key>endCaptures</key>
+                            <dict>
+                                <key>0</key> <dict><key>name</key><string>punctuation.definition.table.end.sql</string></dict>
+                            </dict>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                </dict>
+                <dict>
+                    <key>name</key>
+                    <string>statement.declare.sql</string>
                     <key>begin</key>
                     <string>(?i)\b(declare)\b</string>
                     <key>beginCaptures</key>
@@ -2363,8 +2416,8 @@
                         \b
                         (?:
                             (?:
-                                (inner)                         # capture 1
-                            |   (cross)                         # capture 2
+                                (inner)                          # capture 1
+                            |   (cross)                          # capture 2
                             |   (full|left|right)(?:\s+(outer))? # capture 3-4
                             )
                             \s+
