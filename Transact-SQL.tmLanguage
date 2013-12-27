@@ -313,7 +313,7 @@
                             # select statement clauses
                             option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
-                            return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
                             datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                         )\b)
@@ -421,7 +421,7 @@
                             # select statement clauses
                             option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
-                            return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
                             datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                         )\b)
@@ -847,7 +847,7 @@
                         -->
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -1071,7 +1071,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -1244,7 +1244,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|select|insert|update|delete|exec(?:ute)?|declare|raiserror))</string>
                 </dict>
                 <dict>
                     <key>match</key>
@@ -1266,12 +1266,13 @@
                 </dict>
                 <dict>
                     <key>begin</key>
-                    <string>(?i)\b(?:(if)|(while)|(return))\b</string>
+                    <string>(?i)\b(?:(if)|(while)|(return)|(print))\b</string>
                     <key>beginCaptures</key>
                     <dict>
                         <key>1</key> <dict><key>name</key><string>keyword.other.if.sql</string></dict>
                         <key>2</key> <dict><key>name</key><string>keyword.other.while.sql</string></dict>
                         <key>3</key> <dict><key>name</key><string>keyword.other.return.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>keyword.other.print.sql</string></dict>
                     </dict>
                     <key>patterns</key>
                     <array>
@@ -1281,7 +1282,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>match</key>
@@ -1334,7 +1335,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>match</key>
@@ -1404,11 +1405,11 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -1461,7 +1462,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -1484,7 +1485,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -1579,7 +1580,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -1840,7 +1841,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -2001,7 +2002,7 @@
                                     # select statement clauses
                                     option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                     # statement keywords
-                                    return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                                    print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                     # data types
                                     datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                                 )\b)
@@ -2174,11 +2175,11 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
                 <dict>
                     <key>include</key>
@@ -2537,7 +2538,7 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                         </dict>
                         <dict>
                             <key>include</key>
@@ -2545,7 +2546,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
                 </dict>
             </array>
         </dict>
@@ -2728,7 +2729,7 @@
                             # select statement clauses
                             option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
-                            return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
                             datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                         )\b)
@@ -2777,7 +2778,7 @@
                             # select statement clauses
                             option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
-                            return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
                             datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                         )\b)
@@ -2956,7 +2957,7 @@
                                 # select statement clauses
                                 option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
-                                return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                                print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
                                 datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                             )\b)
@@ -3006,7 +3007,7 @@
                             # select statement clauses
                             option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
-                            return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                            print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
                             datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                         )\b)
@@ -3084,7 +3085,7 @@
                                 # select statement clauses
                                 option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
-                                return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
+                                print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
                                 datetime|char|varchar|text|ntext|date|time|timestamp|bit|int|bigint|tinyint|xml
                             )\b)
