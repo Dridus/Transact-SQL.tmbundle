@@ -311,7 +311,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -419,7 +419,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2000,7 +2000,7 @@
                                     # expression keywords
                                     as|convert|cast|in|between|not|and|or|case|when|then|
                                     # select statement clauses
-                                    option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                    with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                     # statement keywords
                                     print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                     # data types
@@ -2727,7 +2727,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2776,7 +2776,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -2955,7 +2955,7 @@
                                 # expression keywords
                                 as|convert|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
-                                option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
                                 print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
@@ -3005,7 +3005,7 @@
                             # expression keywords
                             as|convert|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
-                            option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                            with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
                             print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                             # data types
@@ -3083,7 +3083,7 @@
                                 # expression keywords
                                 as|convert|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
-                                option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
+                                with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
                                 print|return|goto|begin|end|while|where|from|set|select|insert|update|delete|declare|deallocate|open|close|if|else|exec(?:ute)?|
                                 # data types
@@ -3099,9 +3099,9 @@
                             \s*
                             (?:\b(with)\s*)?    # capture 79
                             (\()                # capture 80
-                            (\w+)
-                            (?:\s*(,)\s*(\w+))* # capture 81-82
-                            (\))                # capture 83
+                            (\w+)               # capture 81
+                            (?:\s*(,)\s*(\w+))* # capture 82-83
+                            (\))                # capture 84
                         )?
                     </string>
                     <key>captures</key>
@@ -3203,8 +3203,9 @@
                         <key>79</key> <dict><key>name</key><string>keyword.other.with.sql</string></dict>
                         <key>80</key> <dict><key>name</key><string>punctuation.with.start.sql</string></dict>
                         <key>81</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
-                        <key>82</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
-                        <key>83</key> <dict><key>name</key><string>punctuation.with.end.sql</string></dict>
+                        <key>82</key> <dict><key>name</key><string>punctuation.other.sql</string></dict>
+                        <key>83</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                        <key>84</key> <dict><key>name</key><string>punctuation.with.end.sql</string></dict>
                     </dict>
                 </dict>
             </array>
