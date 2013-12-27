@@ -18,8 +18,8 @@ What is supported so far:
 - many built-in forms that are Weird, like `CAST`, `CONVERT`, and `EXISTS`
 - sub-selects, sub-sub-selects, selects inside `EXISTS`, scalar selects, and so on
 - function application forms, including the oddball `UPDATE blah SET foo.modify(...)` (that example is for XML)
-- #tables!
-- @tables!
+- `#tables`!
+- `@tables`!
 - `OPTION (...)` and `WITH (...)` clauses
 - `BEGIN TRY` / `BEGIN CATCH`
 - `GOTO` and labels
@@ -42,6 +42,7 @@ To do that:
 1. Create a `SQL` directory in your `Packages` directory, located on OSX in `~/Library/Application Support/Sublime Text 3/Packages` and on Windows in `C:\Users\you\AppData\Roaming\Sublime Text 3\Packages`
 2. Create a file `SQL.tmLanguage` in that directory with:
 
+```xml
     <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN""http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
     <dict>
@@ -71,6 +72,7 @@ To do that:
         <string>C49120AC-6ECC-11D9-ACC8-000D93589AF6</string>
     </dict>
     </plist>
+```
 
 3. Close and re-open any files.
 
