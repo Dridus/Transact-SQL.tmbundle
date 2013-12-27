@@ -11,9 +11,9 @@
         <string>dml</string>
     </array>
     <key>foldingStartMarker</key>
-    <string>\s*\(\s*$</string>
+    <string>(?i)(?:\s*\(|\bbegin)\s*$</string>
     <key>foldingStopMarker</key>
-    <string>^\s*\)</string>
+    <string>(?i)^\s*(?:\)|end\b)</string>
     <key>name</key>
     <string>Transact-SQL</string>
     <key>scopeName</key>
