@@ -35,12 +35,7 @@ Again, send me a message if there's a gap in the syntax that you'd like closed.
 How to use
 ==========
 
-I don't know how to configure Sublime to prefer this mode for `.sql` files over the built-in one, other than to override the built-in one with a dummy version.
-
-To do that:
-
-1. Create a `SQL` directory in your `Packages` directory, located on OSX in `~/Library/Application Support/Sublime Text 3/Packages` and on Windows in `C:\Users\you\AppData\Roaming\Sublime Text 3\Packages`
-2. Create a file `SQL.tmLanguage` in that directory with:
+Add "SQL" to your `ignored_packages` setting to have Sublime ignore the built-in SQL mode. If you want them side-by-side but with Transact-SQL the default for `.sql` files then you'll have to extract `SQL.sublime-package` that comes with Sublime and comment out its `fileTypes`, like this:
 
 ```xml
     <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN""http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -62,10 +57,12 @@ To do that:
         <string>SQL</string>
         <key>patterns</key>
         <array>
-          </array>
-          <key>repository</key>
-          <dict>
-          </dict>
+        …
+        </array>
+        <key>repository</key>
+        <dict>
+        …
+        </dict>
         <key>scopeName</key>
         <string>source.sql</string>
         <key>uuid</key>
