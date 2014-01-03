@@ -1588,7 +1588,7 @@
                     <key>begin</key>
                     <string>(?xi)
                         # captures 1-2
-                        (create)\s+(proc(?:edure)?|function)\s+
+                        (create|alter)\s+(proc(?:edure)?|function)\s+
                         (?:
                             # two part identifier: schema.object
                             (?:
