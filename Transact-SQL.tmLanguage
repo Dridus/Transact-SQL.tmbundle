@@ -105,7 +105,7 @@
                     <key>name</key>
                     <string>keyword.operator.sql</string>
                     <key>match</key>
-                    <string>(?i)(\bnot\s+in\b|\bin\b|\bnot\s+between\b|\bbetween\b|&lt;&gt;|=|&lt;|&gt;|\band\b|\bor\b|\bnot\b|%|\+|-|/|\*)</string>
+                    <string>(?i)(\bnot\s+in\b|\bin\b|\bnot\s+between\b|\bbetween\b|&lt;&gt;|=|&lt;=?|&gt;=?|\bis\s+(?:not\s+)?null\b|\band\b|\bor\b|\bnot\b|%|\+|-|/|\*)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -309,7 +309,7 @@
                         # make sure not to match reserved words thinking they're a column name
                         (?!\b(?:
                             # expression keywords
-                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
                             with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
@@ -417,7 +417,7 @@
                         # make sure not to match reserved words thinking they're a column name
                         (?!\b(?:
                             # expression keywords
-                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
                             with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
@@ -1998,7 +1998,7 @@
                             <string>(?xi)
                                 (?!\b(?:
                                     # expression keywords
-                                    as|convert|cast|in|between|not|and|or|case|when|then|
+                                    as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                                     # select statement clauses
                                     with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                     # statement keywords
@@ -2725,7 +2725,7 @@
                         (?:(as)\s+)?    # capture 2
                         (?!\b(?:
                             # expression keywords
-                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
                             with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
@@ -2774,7 +2774,7 @@
                     <string>(?xi)
                         (?!\b(?:
                             # expression keywords
-                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
                             with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
@@ -2953,7 +2953,7 @@
                             (?:(as)\s+)?    # capture 2
                             (?!\b(?:
                                 # expression keywords
-                                as|convert|cast|in|between|not|and|or|case|when|then|
+                                as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
                                 with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
@@ -3003,7 +3003,7 @@
                     <string>(?xi)
                         (?!\b(?:
                             # expression keywords
-                            as|convert|cast|in|between|not|and|or|case|when|then|
+                            as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                             # select statement clauses
                             with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                             # statement keywords
@@ -3081,7 +3081,7 @@
                             \s+
                             (?!\b(?:
                                 # expression keywords
-                                as|convert|cast|in|between|not|and|or|case|when|then|
+                                as|convert|is|null|cast|in|between|not|and|or|case|when|then|
                                 # select statement clauses
                                 with|option|on|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|from|where|group\s+by|order\s+by|having|union|all|distinct|top|except|intersect|for|
                                 # statement keywords
