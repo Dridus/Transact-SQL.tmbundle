@@ -103,6 +103,12 @@
                 </dict>
                 <dict>
                     <key>name</key>
+                    <string>constant.numeric</string>
+                    <key>match</key>
+                    <string>-?\d+(?:\.\d+)?</string>
+                </dict>
+                <dict>
+                    <key>name</key>
                     <string>keyword.operator.sql</string>
                     <key>match</key>
                     <string>(?i)(\bnot\s+in\b|\bin\b|\bnot\s+between\b|\bbetween\b|&lt;&gt;|=|&lt;=?|&gt;=?|\bis\s+(?:not\s+)?null\b|\band\b|\bor\b|\bnot\b|%|\+|-|/|\*)</string>
@@ -260,12 +266,6 @@
                     <dict>
                         <key>1</key> <dict><key>name</key><string>keyword.other.end.sql</string></dict>
                     </dict>
-                </dict>
-                <dict>
-                    <key>name</key>
-                    <string>constant.numeric</string>
-                    <key>match</key>
-                    <string>-?\d+(?:\.\d+)?</string>
                 </dict>
                 <dict>
                     <key>name</key>
