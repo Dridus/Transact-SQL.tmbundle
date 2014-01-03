@@ -1845,6 +1845,156 @@
                 </dict>
                 <dict>
                     <key>name</key>
+                    <string>meta.alter.table.sql</string>
+                    <key>begin</key>
+                    <string>(?xi)
+                        # captures 1-2
+                        (alter)\s+(table)\s+
+                        (?:
+                            # three part identifier: database.schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 3-5
+                            |   (")([^"]+)(")               # captures 6-8
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 9
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 10-12
+                            |   (")([^"]+)(")               # captures 13-15
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 16
+                            )?
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 17-19
+                            |   (")([^"]+)(")               # captures 20-22
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 23
+                            )
+                        |
+                            # two part identifier: schema.object
+                            (?:
+                                (\[)([^]]+)(\])             # captures 24-26
+                            |   (")([^"]+)(")               # captures 27-29
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 30
+                            )
+                            \.
+                            (?:
+                                (\[)([^]]+)(\])             # captures 31-33
+                            |   (")([^"]+)(")               # captures 34-36
+                            |   ([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 37
+                            )
+                        |
+                            # single part object name identifier
+                            (?:
+                                (\[)([^]]+)(\])             # captures 38-40
+                            |   (")([^"]+)(")               # captures 41-43
+                            |   ((?:\b|[#@])[_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 44
+                            )
+                        )
+                    </string>
+                    <key>beginCaptures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.alter.sql</string></dict>
+                        <key>2</key> <dict><key>name</key><string>keyword.other.table.sql</string></dict>
+
+                        <key>3</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>9</key> <dict><key>name</key><string>variable.database.sql</string></dict>
+
+                        <key>10</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>11</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>12</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>13</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>14</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>15</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>16</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>17</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>18</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>19</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>20</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>21</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>22</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>23</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <key>24</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>25</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>26</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>27</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>28</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+                        <key>29</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>30</key> <dict><key>name</key><string>variable.schema.sql</string></dict>
+
+                        <key>31</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>32</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>33</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>34</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>35</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>36</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>37</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+
+                        <key>38</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>39</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>40</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>41</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>42</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                        <key>43</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>44</key> <dict><key>name</key><string>variable.object.sql</string></dict>
+                    </dict>
+                    <key>patterns</key>
+                    <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.altertable.altercolumn.sql</string>
+                            <key>begin</key>
+                            <string>(?i)\b(alter)\s+(column)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.alter.sql</string></dict>
+                                <key>2</key> <dict><key>name</key><string>keyword.other.column.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#column_definitions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                        </dict>
+                        <dict>
+                            <key>name</key>
+                            <string>clause.altertable.add.sql</string>
+                            <key>begin</key>
+                            <string>(?i)\b(add)\b</string>
+                            <key>beginCaptures</key>
+                            <dict>
+                                <key>1</key> <dict><key>name</key><string>keyword.other.add.sql</string></dict>
+                            </dict>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#table_definitions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                        </dict>
+                    </array>
+                    <key>end</key>
+                    <string>(?i)(?=[);]|\b(?:set|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare|raiserror)\b)</string>
+                </dict>
+                <dict>
+                    <key>name</key>
                     <string>meta.drop.sql</string>
                     <key>match</key>
                     <string>(?xi)
@@ -3225,6 +3375,49 @@
                 </dict>
                 <dict>
                     <key>match</key>
+                    <string>(?i)\b(unique|index)\b</string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>match</key>
+                    <string>(?xi)
+                        \b(constraint)
+                        \s*
+                        (?:
+                            (\[)([^]]+)(\])             # captures 1-3
+                        |   (")([^"]+)(")               # captures 4-6
+                        |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
+                        )
+                    </string>
+                    <key>captures</key>
+                    <dict>
+                        <key>1</key> <dict><key>name</key><string>keyword.other.constraint.sql</string></dict>
+
+                        <key>2</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>3</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
+                        <key>4</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>5</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
+                        <key>8</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
+                    </dict>
+                </dict>
+                <dict>
+                    <key>include</key>
+                    <string>#column_definitions</string>
+                </dict>
+            </array>
+        </dict>
+
+        <key>column_definitions</key>
+        <dict>
+            <key>patterns</key>
+            <array>
+                <dict>
+                    <key>match</key>
                     <string>(?i)\b(?:(not)\s+)?(null)\b</string>
                     <key>captures</key>
                     <dict>
@@ -3263,38 +3456,6 @@
                         <key>1</key> <dict><key>name</key><string>keyword.other.not.sql</string></dict>
                         <key>2</key> <dict><key>name</key><string>keyword.other.for.sql</string></dict>
                         <key>3</key> <dict><key>name</key><string>keyword.other.replication.sql</string></dict>
-                    </dict>
-                </dict>
-                <dict>
-                    <key>match</key>
-                    <string>(?i)\b(unique|index)\b</string>
-                    <key>captures</key>
-                    <dict>
-                        <key>1</key> <dict><key>name</key><string>keyword.other.sql</string></dict>
-                    </dict>
-                </dict>
-                <dict>
-                    <key>match</key>
-                    <string>(?xi)
-                        \b(constraint)
-                        \s*
-                        (?:
-                            (\[)([^]]+)(\])             # captures 1-3
-                        |   (")([^"]+)(")               # captures 4-6
-                        |   \b([_a-zA-Z][#$@_a-zA-Z0-9]*) # capture 7
-                        )
-                    </string>
-                    <key>captures</key>
-                    <dict>
-                        <key>1</key> <dict><key>name</key><string>keyword.other.constraint.sql</string></dict>
-
-                        <key>2</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
-                        <key>3</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
-                        <key>4</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
-                        <key>5</key> <dict><key>name</key><string>punctuation.identifier.start.sql</string></dict>
-                        <key>6</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
-                        <key>7</key> <dict><key>name</key><string>punctuation.identifier.end.sql</string></dict>
-                        <key>8</key> <dict><key>name</key><string>entity.name.constraint.sql</string></dict>
                     </dict>
                 </dict>
                 <dict>
