@@ -1055,7 +1055,7 @@
                                         </dict>
                                     </array>
                                     <key>end</key>
-                                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                                 </dict>
                                 <dict>
                                     <key>include</key>
@@ -1063,7 +1063,7 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                         </dict>
                         <dict>
                             <key>include</key>
@@ -2387,7 +2387,7 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                         </dict>
                         <dict>
                             <key>match</key>
@@ -2585,7 +2585,7 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                         </dict>
                         <dict>
                             <key>name</key>
@@ -2726,7 +2726,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
@@ -2779,11 +2779,11 @@
                                 </dict>
                             </array>
                             <key>end</key>
-                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                            <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                 </dict>
                 <dict>
                     <key>string</key>
@@ -2803,7 +2803,7 @@
                         </dict>
                     </array>
                     <key>end</key>
-                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec|declare)\b)</string>
+                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                 </dict>
                 <dict>
                     <key>name</key>
