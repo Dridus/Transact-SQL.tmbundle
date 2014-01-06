@@ -26,7 +26,6 @@ What is supported so far:
 - `CROSS APPLY`, `CROSS JOIN`, all `OUTER JOIN`s
 
 What's known missing:
-- `ALTER TABLE`
 - `CREATE INDEX` and `DROP INDEX`
 - `OVER` and `WITH ROLLUP`
 
