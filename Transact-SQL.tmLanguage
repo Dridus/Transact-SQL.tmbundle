@@ -1312,7 +1312,8 @@
                         (?:\s+(insensitive))?
                         (?:\s+(scroll))?
                         \s+(cursor)
-                        \s+(for)
+                        (?:\s+(fast_forward))?
+                        \s+(for)\b
                     </string>
                     <key>beginCaptures</key>
                     <dict>
@@ -1321,7 +1322,8 @@
                         <key>3</key> <dict><key>name</key><string>keyword.other.insensitive.sql</string></dict>
                         <key>4</key> <dict><key>name</key><string>keyword.other.scroll.sql</string></dict>
                         <key>5</key> <dict><key>name</key><string>keyword.other.cursor.sql</string></dict>
-                        <key>6</key> <dict><key>name</key><string>keyword.other.for.sql</string></dict>
+                        <key>6</key> <dict><key>name</key><string>keyword.other.fast_forward.sql</string></dict>
+                        <key>7</key> <dict><key>name</key><string>keyword.other.for.sql</string></dict>
                     </dict>
                     <key>patterns</key>
                     <array>
