@@ -2113,6 +2113,21 @@
                             <string>#comments</string>
                         </dict>
                         <dict>
+                            <key>name</key>
+                            <string>clause.execute.computed.sql</string>
+                            <key>begin</key>
+                            <string>\(</string>
+                            <key>patterns</key>
+                            <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#expressions</string>
+                                </dict>
+                            </array>
+                            <key>end</key>
+                            <string>\)</string>
+                        </dict>
+                        <dict>
                             <key>include</key>
                             <string>#function_application</string>
                         </dict>
