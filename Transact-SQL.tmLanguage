@@ -1027,12 +1027,12 @@
                                     <key>begin</key>
                                     <string>(?xi)
                                         (?:
-                                            (\[)([^]]+)(\])                 # captures 9-11
-                                        |   (")([^"]+)(")                   # captures 12-14
-                                        |   ([_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 15
+                                            (\[)([^]]+)(\])                 # captures 1-3
+                                        |   (")([^"]+)(")                   # captures 4-6
+                                        |   ([_a-zA-Z][#$@_a-zA-Z0-9]*)     # capture 7
                                         )
                                         \s*
-                                        (=)
+                                        (=) # capture 8
                                         \s*
                                     </string>
                                     <key>beginCaptures</key>
@@ -1055,7 +1055,7 @@
                                         </dict>
                                     </array>
                                     <key>end</key>
-                                    <string>(?i)(?=[);]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
+                                    <string>(?i)(?=[);,]|\b(?:option|for|from|union|except|intersect|into|(?:(?:inner|cross|(?:left|right|full)(?:\s+outer)?)\s+)?(?:join|apply)|where|group\s+by|order\s+by|having|print|goto|return|fetch|open|while|deallocate|go|if|else|begin|end|create|drop|set|select|insert|update|delete|exec(?:ute)?|declare)\b)</string>
                                 </dict>
                                 <dict>
                                     <key>include</key>
