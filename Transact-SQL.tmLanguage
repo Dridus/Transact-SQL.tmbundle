@@ -203,6 +203,10 @@
                     <array>
                         <dict>
                             <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
+                            <key>include</key>
                             <string>#select_statement</string>
                         </dict>
                     </array>
@@ -411,6 +415,10 @@
         <dict>
             <key>patterns</key>
             <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
                 <dict>
                     <key>begin</key>
                     <string>(?xi)
@@ -793,6 +801,10 @@
                     <key>patterns</key>
                     <array>
                         <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
                             <key>begin</key>
                             <string>\(</string>
                             <key>beginCaptures</key>
@@ -1013,6 +1025,10 @@
                     <key>patterns</key>
                     <array>
                         <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
+                        <dict>
                             <key>begin</key>
                             <string>(?i)\b(set)\b</string>
                             <key>beginCaptures</key>
@@ -1021,6 +1037,10 @@
                             </dict>
                             <key>patterns</key>
                             <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#comments</string>
+                                </dict>
                                 <dict>
                                     <key>name</key>
                                     <string>clause.update.assignment.sql</string>
@@ -1380,6 +1400,10 @@
                     </dict>
                     <key>patterns</key>
                     <array>
+                        <dict>
+                            <key>include</key>
+                            <string>#comments</string>
+                        </dict>
                         <dict>
                             <key>begin</key>
                             <string>(?i)\b(into)\b</string>
@@ -1966,6 +1990,10 @@
                             <array>
                                 <dict>
                                     <key>include</key>
+                                    <string>#comments</string>
+                                </dict>
+                                <dict>
+                                    <key>include</key>
                                     <string>#column_definitions</string>
                                 </dict>
                             </array>
@@ -1983,6 +2011,10 @@
                             </dict>
                             <key>patterns</key>
                             <array>
+                                <dict>
+                                    <key>include</key>
+                                    <string>#comments</string>
+                                </dict>
                                 <dict>
                                     <key>include</key>
                                     <string>#table_definitions</string>
@@ -2723,6 +2755,10 @@
             <key>patterns</key>
             <array>
                 <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
+                <dict>
                     <key>name</key>
                     <string>clause.from.sql</string>
                     <key>begin</key>
@@ -2865,6 +2901,10 @@
         <dict>
             <key>patterns</key>
             <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
                 <dict>
                     <key>name</key>
                     <string>clause.tablesource.subselect.sql</string>
@@ -3383,6 +3423,10 @@
             <key>patterns</key>
             <array>
                 <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
+                <dict>
                     <key>match</key>
                     <string>,</string>
                     <key>captures</key>
@@ -3433,6 +3477,10 @@
         <dict>
             <key>patterns</key>
             <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
                 <dict>
                     <key>match</key>
                     <string>(?i)\b(?:(not)\s+)?(null)\b</string>
@@ -3511,6 +3559,10 @@
             <key>patterns</key>
             <array>
                 <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
+                <dict>
                     <key>name</key>
                     <string>meta.go.sql</string>
                     <key>match</key>
@@ -3527,6 +3579,10 @@
         <dict>
             <key>patterns</key>
             <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
                 <dict>
                     <key>match</key>
                     <string>\s*(,)\s*</string>
@@ -3559,6 +3615,10 @@
         <dict>
             <key>patterns</key>
             <array>
+                <dict>
+                    <key>include</key>
+                    <string>#comments</string>
+                </dict>
                 <dict>
                     <key>match</key>
                     <string>\s*(,)\s*</string>
